@@ -1,0 +1,11 @@
+# Standard .gitignore for JetBrains
+
+# JetBrains settings
+.idea
+
+# Settings
+GameOfLife.iml
+
+# IntelliJ (FxBuild)
+/out/
+
