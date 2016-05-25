@@ -12,7 +12,7 @@ public interface GameGrid {
     //    return this.numberOfCollumns;
     //}
 
-    int getNumberOfCollumns();
+    int getNumberOfColumns();
     int getNumberOfRows();
 
     CellState getCurrentState(int x_coor, int y_coor);
