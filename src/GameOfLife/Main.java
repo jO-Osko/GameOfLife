@@ -1,7 +1,9 @@
 package GameOfLife;
 
+import GameOfLife.Interfaces.GameGrid;
 import GameOfLife.canvas.CanvasManager;
 import GameOfLife.canvas.ResizableCanvas;
+import GameOfLife.game.BasicGame;
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -13,6 +15,9 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+
+import java.util.ListResourceBundle;
+import java.util.ResourceBundle;
 
 public class Main extends Application {
 
@@ -35,15 +40,7 @@ public class Main extends Application {
 
 
         Scene scene = new Scene(root, this.windowWidth, this.windowHeight);
-        ResizableCanvas canvas = (ResizableCanvas) scene.lookup("#mainCanvas");
-
-        Pane canvasPane = (Pane) scene.lookup("#canvasPane");
-
         primaryStage.setScene(scene);
-        canvas.widthProperty().bind(
-                canvasPane.widthProperty());
-        canvas.heightProperty().bind(
-                canvasPane.heightProperty());
 
         primaryStage.show();
     }
