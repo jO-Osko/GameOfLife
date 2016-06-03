@@ -9,4 +9,9 @@ public class AllDead implements CellCalculator{
     public CellState getNextState(int x_coor, int y_coor) {
         return CellState.DEAD;
     }
+
+    @Override
+    public String getName() {
+        return "Vsi umrejo";
+    }
 }

@@ -28,4 +28,9 @@ public class ConwaysGame extends NeighbourCalculator implements CellCalculator {
         }
         return CellState.DEAD;
     }
+
+    @Override
+    public String getName() {
+        return "Conway's game of life";
+    }
 }

@@ -35,4 +35,9 @@ public class Rule110 implements CellCalculator{
         }
         return CellState.ALIVE;
     }
+
+    @Override
+    public String getName() {
+        return "Rule 110";
+    }
 }

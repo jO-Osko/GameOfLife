@@ -10,4 +10,9 @@ public class AllAlive implements CellCalculator{
     public CellState getNextState(int x_coor, int y_coor) {
         return CellState.ALIVE;
     }
+
+    @Override
+    public String getName() {
+        return "Vsi preživijo";
+    }
 }
