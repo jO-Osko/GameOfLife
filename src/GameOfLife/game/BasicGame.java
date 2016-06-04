@@ -62,4 +62,9 @@ public class BasicGame implements GameGrid {
         this.cellGrid.updateGrid(nextGeneration);
     }
 
+    @Override
+    public void setCell(int x, int y){
+        this.cellGrid.addLiveCell(x, y);
+    }
+
 }

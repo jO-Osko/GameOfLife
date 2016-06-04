@@ -48,7 +48,7 @@ public class Controller implements Initializable{
         this.mainCanvas.heightProperty().bind(
                 this.canvasPane.heightProperty());
 
-        this.mainGame = new BasicGame(10,20);
+        this.mainGame = new BasicGame(20,20);
 
         this.canvasManager = new CanvasManager(this.mainCanvas, this.mainGame);
 
@@ -64,7 +64,7 @@ public class Controller implements Initializable{
             MenuItem menuItem = new MenuItem(calculator.getName());
 
             menuItem.setOnAction(event -> {
-                this.mainGame = new BasicGame(20,10, calculator);
+                this.mainGame = new BasicGame(20,20, calculator);
                 this.canvasManager.changeGameGrid(this.mainGame);
             });
 

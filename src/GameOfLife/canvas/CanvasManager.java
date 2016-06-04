@@ -5,9 +5,12 @@ import GameOfLife.Interfaces.GameGrid;
 import GameOfLife.cell.CellState;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.EventHandler;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
+import sun.rmi.runtime.Log;
 
 public class CanvasManager {
 
@@ -16,16 +19,17 @@ public class CanvasManager {
 
     private int lineHeight;
     private int lineWidth;
-    private int cellWidth;
-    private int cellHeight;
+    private double cellWidth;
+    private double cellHeight;
 
-    public CanvasManager(Canvas canvas, GameGrid gameGrid, int lineHeight, int lineWidth, int cellWidth, int cellHeight) {
+    public CanvasManager(Canvas canvas, GameGrid gameGrid, int lineHeight, int lineWidth, double cellWidth, double cellHeight) {
         this.canvas = canvas;
         this.gameGrid = gameGrid;
         this.lineHeight = lineHeight;
         this.lineWidth = lineWidth;
         this.cellWidth = cellWidth;
         this.cellHeight = cellHeight;
+
 
         setUpListeners();
 
@@ -55,8 +59,8 @@ public class CanvasManager {
         //Narisi kvadrat v x_ind vrstici in v y_ind stolpcu
 
         //context.strokeRect(igranje s piksli);
-        context.setFill(cellState == CellState.ALIVE ? Color.BLACK: Color.RED);
-        context.fillRect(y_ind*10, x_ind*10, y_ind*10 + 5, x_ind*10 + 5);
+        context.setFill(cellState == CellState.ALIVE ? Color.BLACK: Color.TRANSPARENT);
+        context.fillRect(x_ind*this.cellWidth, y_ind*this.cellHeight, this.cellWidth, this.cellHeight);
 
 
     }
@@ -76,36 +80,56 @@ public class CanvasManager {
 
     private void drawGrid(GraphicsContext gc, Color color){
         // TODO Uredi da bo lepo izrisalo na canvas
+
         gc.setStroke(color);
         final double canvasHeight = this.canvas.getHeight();
+
         final double canvasWidth = this.canvas.getWidth();
-        gc.clearRect(0,0,canvasHeight, canvasWidth);
+        //neumno ampak dela :)
+        gc.clearRect(0,0,1920, 1080);
+
         // vertical
         gc.setLineWidth(this.lineWidth);
         for(int x = 1; x < this.gameGrid.getNumberOfColumns(); ++x){
-            final double x_coor = x*this.lineWidth + x*this.cellWidth - 0.5;
+            final double x_coor = x*this.cellWidth;
             gc.strokeLine(x_coor, 0, x_coor, canvasHeight);
         }
 
         // horizontal
         gc.setLineWidth(this.lineHeight);
         for(int y = 1; y < this.gameGrid.getNumberOfRows(); ++y){
-            final double y_coor = y*this.lineHeight + y*this.cellHeight - 0.5;
+            final double y_coor = y*this.cellHeight;
             gc.strokeLine(0, y_coor, canvasWidth, y_coor);
         }
+
     }
 
     private void setUpListeners(){
         this.canvas.heightProperty().addListener((observable, oldValue, newValue) -> {
             // Poracunaj nove visine celic itd (
-            // newValue.doubleValue();
+
+            this.cellHeight = newValue.doubleValue()/this.gameGrid.getNumberOfRows();
             this.redraw();
+
+
         });
 
         this.canvas.widthProperty().addListener((observable, oldValue, newValue) -> {
-            // Poracunaj nove sirine celic itd (
-            // newValue.doubleValue();
+            // Poracunaj nove sirine celic itd
+            this.cellWidth = newValue.doubleValue()/this.gameGrid.getNumberOfColumns();
             this.redraw();
+
+        });
+
+        this.canvas.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+
+            @Override
+            public void handle(MouseEvent event) {
+                double x_cor = event.getX()/ cellWidth;
+                double y_cor =  event.getY()/ cellHeight;
+                gameGrid.setCell((int) y_cor,(int) x_cor);
+                redraw();
+            }
         });
 
     }
