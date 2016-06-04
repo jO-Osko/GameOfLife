@@ -36,6 +36,8 @@ public class ConwaysGame extends NeighbourCalculator implements CellCalculator {
 
     @Override
     public void UpdateGrid(GameGrid gameGrid) {
+        super.UpdateGrid(gameGrid);
         this.gameGrid = gameGrid;
     }
+
 }

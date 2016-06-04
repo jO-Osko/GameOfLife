@@ -64,8 +64,7 @@ public class Controller implements Initializable{
             MenuItem menuItem = new MenuItem(calculator.getName());
 
             menuItem.setOnAction(event -> {
-                this.mainGame = new BasicGame(20,10);
-                calculator.UpdateGrid(this.mainGame);
+                this.mainGame = new BasicGame(20,10, calculator);
                 this.canvasManager.changeGameGrid(this.mainGame);
             });
 

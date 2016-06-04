@@ -2,6 +2,8 @@ package GameOfLife.game;
 
 
 import GameOfLife.CellCalculators.AllAlive;
+import GameOfLife.CellCalculators.ConwaysGame;
+import GameOfLife.CellCalculators.Reverse;
 import GameOfLife.Interfaces.CellCalculator;
 import GameOfLife.Interfaces.CellGrid;
 import GameOfLife.Interfaces.GameGrid;
@@ -20,10 +22,15 @@ public class BasicGame implements GameGrid {
 
 
     public BasicGame(int numberOfRows, int numberOfColumns) {
+        this(numberOfRows, numberOfColumns, new ConwaysGame(null));
+    }
+
+    public BasicGame(int numberOfRows, int numberOfColumns, CellCalculator cellCalculator){
         this.numberOfRows = numberOfRows;
         this.numberOfColumns = numberOfColumns;
         this.cellGrid = new ArrayListCellGrid(numberOfRows, numberOfColumns);
-        this.cellCalculator = new AllAlive();
+        this.cellCalculator = cellCalculator;
+        this.cellCalculator.UpdateGrid(this);
     }
 
     @Override

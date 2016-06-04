@@ -20,7 +20,7 @@ public class NeighbourCalculator {
 
         for(int dx = -1; dx <=1; ++dx ){
             for(int dy = -1; dy <= 1; ++dy){
-                if(dx==dy && dx==0){ // Ignore current cell
+                if(dx==0 && dy==0){ // Ignore current cell
                     continue;
                 }
                 if(this.gameGrid.getCurrentState(x_coor + dx, y_coor + dy) == CellState.ALIVE){
@@ -29,6 +29,10 @@ public class NeighbourCalculator {
             }
         }
         return alive;
+    }
+
+    public void UpdateGrid(GameGrid gameGrid){
+        this.gameGrid = gameGrid;
     }
 
 }
