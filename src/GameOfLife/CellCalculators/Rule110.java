@@ -7,7 +7,7 @@ import GameOfLife.cell.CellState;
 
 public class Rule110 implements CellCalculator{
 
-    private final GameGrid gameGrid;
+    private GameGrid gameGrid;
 
     public Rule110(GameGrid gameGrid) {
         this.gameGrid = gameGrid;
@@ -39,5 +39,10 @@ public class Rule110 implements CellCalculator{
     @Override
     public String getName() {
         return "Rule 110";
+    }
+
+    @Override
+    public void UpdateGrid(GameGrid gameGrid) {
+        this.gameGrid = gameGrid;
     }
 }

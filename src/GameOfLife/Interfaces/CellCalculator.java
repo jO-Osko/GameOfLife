@@ -9,4 +9,6 @@ public interface CellCalculator {
 
     String getName();
 
+    default void UpdateGrid(GameGrid gameGrid){}
+
 }

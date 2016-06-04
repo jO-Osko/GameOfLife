@@ -8,7 +8,7 @@ import GameOfLife.cell.CellState;
 
 public class ConwaysGame extends NeighbourCalculator implements CellCalculator {
 
-    private final GameGrid gameGrid;
+    private GameGrid gameGrid;
 
     public ConwaysGame(GameGrid gameGrid) {
         super(gameGrid);
@@ -32,5 +32,10 @@ public class ConwaysGame extends NeighbourCalculator implements CellCalculator {
     @Override
     public String getName() {
         return "Conway's game of life";
+    }
+
+    @Override
+    public void UpdateGrid(GameGrid gameGrid) {
+        this.gameGrid = gameGrid;
     }
 }
