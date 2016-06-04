@@ -20,9 +20,9 @@
             </items>
           </Menu>
           <Menu fx:id="rulesMenu" mnemonicParsing="false" text="Pravila" />
-          <Menu mnemonicParsing="false" text="Help">
+          <Menu mnemonicParsing="false" text="Igra">
             <items>
-              <MenuItem mnemonicParsing="false" text="About" />
+              <MenuItem fx:id="nextGenerationItem" mnemonicParsing="false" text="Naslednja generacija" />
             </items>
           </Menu>
         </menus>

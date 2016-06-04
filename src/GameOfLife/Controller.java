@@ -1,12 +1,11 @@
 package GameOfLife;
 
-import GameOfLife.CellCalculators.AllAlive;
-import GameOfLife.CellCalculators.AllDead;
-import GameOfLife.CellCalculators.ConwaysGame;
-import GameOfLife.CellCalculators.Rule110;
+import GameOfLife.CellCalculators.*;
 import GameOfLife.Interfaces.CellCalculator;
 import GameOfLife.canvas.CanvasManager;
 import GameOfLife.game.BasicGame;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
@@ -21,6 +20,10 @@ import java.util.ResourceBundle;
 
 public class Controller implements Initializable{
 
+    private CanvasManager canvasManager;
+    private BasicGame mainGame;
+
+
     @FXML
     private Canvas mainCanvas;
 
@@ -29,6 +32,9 @@ public class Controller implements Initializable{
 
     @FXML
     private Menu rulesMenu;
+
+    @FXML
+    private MenuItem nextGenerationItem;
 
     @FXML
     private void handleCanvasClick(MouseEvent event){
@@ -42,21 +48,34 @@ public class Controller implements Initializable{
         this.mainCanvas.heightProperty().bind(
                 this.canvasPane.heightProperty());
 
+        this.mainGame = new BasicGame(10,20);
+
+        this.canvasManager = new CanvasManager(this.mainCanvas, this.mainGame);
+
         ArrayList<CellCalculator> calculators = new ArrayList<>(4);
 
         calculators.add(new AllAlive());
         calculators.add(new AllDead());
-        calculators.add(new ConwaysGame(null));
-        calculators.add(new Rule110(null));
+        calculators.add(new ConwaysGame(this.mainGame));
+        calculators.add(new Rule110(this.mainGame));
+        calculators.add(new Reverse(mainGame));
 
         for(CellCalculator calculator: calculators){
             MenuItem menuItem = new MenuItem(calculator.getName());
-            menuItem.setOnAction(event -> System.out.println(calculator.getName()));
+
+            menuItem.setOnAction(event -> {
+                this.mainGame = new BasicGame(20,10);
+                calculator.UpdateGrid(this.mainGame);
+                this.canvasManager.changeGameGrid(this.mainGame);
+            });
+
             this.rulesMenu.getItems().add(menuItem);
         }
 
-        CanvasManager canvasManager = new CanvasManager(this.mainCanvas, new BasicGame(10,20));
-
+        nextGenerationItem.setOnAction(event -> {
+            this.mainGame.nextGeneration();
+            this.canvasManager.redraw();
+        });
 
     }
 

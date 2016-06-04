@@ -35,15 +35,30 @@ public class CanvasManager {
         this(canvas, gameGrid, 1, 1, 10, 10);
     }
 
+    public void redraw(boolean drawGrid){
+        if(drawGrid){
+            this.drawGrid(this.canvas.getGraphicsContext2D());
+        }
+        this.drawCells();
+    }
+
     public void redraw(){
-        this.drawGrid(this.canvas.getGraphicsContext2D());
-        drawCells();
+        this.redraw(true);
+    }
+
+    public void changeGameGrid(GameGrid gameGrid){
+        this.gameGrid = gameGrid;
+        this.redraw();
     }
 
     private void drawCell(int x_ind, int y_ind, CellState cellState, GraphicsContext context){
         //Narisi kvadrat v x_ind vrstici in v y_ind stolpcu
 
         //context.strokeRect(igranje s piksli);
+        context.setFill(cellState == CellState.ALIVE ? Color.BLACK: Color.RED);
+        context.fillRect(y_ind*10, x_ind*10, y_ind*10 + 5, x_ind*10 + 5);
+
+
     }
 
     private void drawCells(){
@@ -64,6 +79,7 @@ public class CanvasManager {
         gc.setStroke(color);
         final double canvasHeight = this.canvas.getHeight();
         final double canvasWidth = this.canvas.getWidth();
+        gc.clearRect(0,0,canvasHeight, canvasWidth);
         // vertical
         gc.setLineWidth(this.lineWidth);
         for(int x = 1; x < this.gameGrid.getNumberOfColumns(); ++x){
@@ -93,6 +109,5 @@ public class CanvasManager {
         });
 
     }
-
 
 }
