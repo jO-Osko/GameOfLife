@@ -5,8 +5,8 @@ import GameOfLife.CellCalculators.AllDead;
 import GameOfLife.CellCalculators.ConwaysGame;
 import GameOfLife.CellCalculators.Rule110;
 import GameOfLife.Interfaces.CellCalculator;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import GameOfLife.canvas.CanvasManager;
+import GameOfLife.game.BasicGame;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
@@ -18,7 +18,6 @@ import javafx.scene.layout.Pane;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-import java.util.logging.MemoryHandler;
 
 public class Controller implements Initializable{
 
@@ -55,6 +54,8 @@ public class Controller implements Initializable{
             menuItem.setOnAction(event -> System.out.println(calculator.getName()));
             this.rulesMenu.getItems().add(menuItem);
         }
+
+        CanvasManager canvasManager = new CanvasManager(this.mainCanvas, new BasicGame(10,20));
 
 
     }
