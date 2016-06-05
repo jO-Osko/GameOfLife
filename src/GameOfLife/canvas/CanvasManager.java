@@ -60,7 +60,8 @@ public class CanvasManager {
 
         //context.strokeRect(igranje s piksli);
         context.setFill(cellState == CellState.ALIVE ? Color.BLACK: Color.TRANSPARENT);
-        context.fillRect(x_ind*this.cellWidth, y_ind*this.cellHeight, this.cellWidth, this.cellHeight);
+        // Zamenjamo x in y
+        context.fillRect(y_ind*this.cellWidth, x_ind*this.cellHeight, this.cellWidth, this.cellHeight);
 
 
     }
