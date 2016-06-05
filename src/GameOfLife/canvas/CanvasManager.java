@@ -105,21 +105,31 @@ public class CanvasManager {
 
     }
 
+    private void recalculateCellHeight(){
+        this.cellHeight = this.canvas.heightProperty().doubleValue()/this.gameGrid.getNumberOfRows();
+    }
+
+    private void recalculateCellWidth(){
+        this.cellWidth = this.canvas.widthProperty().doubleValue()/this.gameGrid.getNumberOfColumns();
+    }
+
+    public void recalculateCellDimensions(){
+        this.recalculateCellHeight();
+        this.recalculateCellWidth();
+        this.redraw();
+    }
+
     private void setUpListeners(){
         this.canvas.heightProperty().addListener((observable, oldValue, newValue) -> {
-            // Poracunaj nove visine celic itd (
-
-            this.cellHeight = newValue.doubleValue()/this.gameGrid.getNumberOfRows();
+            // Poracunaj nove visine celic itd
+            this.recalculateCellHeight();
             this.redraw();
-
-
         });
 
         this.canvas.widthProperty().addListener((observable, oldValue, newValue) -> {
             // Poracunaj nove sirine celic itd
-            this.cellWidth = newValue.doubleValue()/this.gameGrid.getNumberOfColumns();
+            this.recalculateCellWidth();
             this.redraw();
-
         });
 
         this.canvas.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
