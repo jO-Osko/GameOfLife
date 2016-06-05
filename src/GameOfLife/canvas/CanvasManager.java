@@ -39,6 +39,10 @@ public class CanvasManager {
         this(canvas, gameGrid, 1, 1, 10, 10);
     }
 
+    public CanvasManager(Canvas canvas){
+        this(canvas, null);
+    }
+
     public void redraw(boolean drawGrid){
         if(drawGrid){
             this.drawGrid(this.canvas.getGraphicsContext2D());
@@ -56,9 +60,6 @@ public class CanvasManager {
     }
 
     private void drawCell(int x_ind, int y_ind, CellState cellState, GraphicsContext context){
-        //Narisi kvadrat v x_ind vrstici in v y_ind stolpcu
-
-        //context.strokeRect(igranje s piksli);
         context.setFill(cellState == CellState.ALIVE ? Color.BLACK: Color.TRANSPARENT);
         // Zamenjamo x in y
         context.fillRect(y_ind*this.cellWidth, x_ind*this.cellHeight, this.cellWidth, this.cellHeight);
@@ -80,7 +81,6 @@ public class CanvasManager {
     }
 
     private void drawGrid(GraphicsContext gc, Color color){
-        // TODO Uredi da bo lepo izrisalo na canvas
 
         gc.setStroke(color);
         final double canvasHeight = this.canvas.getHeight();

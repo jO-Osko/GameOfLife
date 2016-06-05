@@ -46,6 +46,12 @@ public class BasicGameGrid implements GameGrid {
     }
 
     @Override
+    public void updateCalculator(CellCalculator cellCalculator) {
+        this.cellCalculator = cellCalculator;
+        cellCalculator.UpdateGrid(this);
+    }
+
+    @Override
     public void nextGeneration() {
         ArrayList<ArrayList<CellState>> nextGeneration = new ArrayList<>(this.numberOfRows);
         for (int j = 0; j < this.numberOfRows; ++j) {
@@ -62,6 +68,10 @@ public class BasicGameGrid implements GameGrid {
     @Override
     public void setCell(int x, int y){
         this.cellGrid.toggleCell(x, y);
+    }
+
+    public static BasicGameGrid demoGameGrid(){
+        return new BasicGameGrid(20,30);
     }
 
 }

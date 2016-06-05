@@ -16,6 +16,7 @@ public interface GameGrid {
     int getNumberOfRows();
     void setCell(int x, int y);
     CellState getCurrentState(int x_coor, int y_coor);
+    void updateCalculator(CellCalculator cellCalculator);
 
     void nextGeneration();
 

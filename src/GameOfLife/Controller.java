@@ -19,8 +19,6 @@ import java.util.ResourceBundle;
 
 public class Controller implements Initializable{
 
-    private CanvasManager canvasManager;
-    private BasicGameGrid mainGameGrid;
     private BasicGame mainGame;
 
 
@@ -49,9 +47,10 @@ public class Controller implements Initializable{
         this.mainCanvas.heightProperty().bind(
                 this.canvasPane.heightProperty());
 
-        this.mainGameGrid = new BasicGameGrid(20,20);
+        CanvasManager canvasManager = new CanvasManager(this.mainCanvas);
 
-        this.canvasManager = new CanvasManager(this.mainCanvas, this.mainGameGrid);
+        this.mainGame = new BasicGame(null, canvasManager);
+        this.mainGame.updateGameGrid(BasicGameGrid.demoGameGrid());
 
         ArrayList<CellCalculator> calculators = new ArrayList<>(4);
 
@@ -65,17 +64,14 @@ public class Controller implements Initializable{
             MenuItem menuItem = new MenuItem(calculator.getName());
 
             menuItem.setOnAction(event -> {
-                this.mainGameGrid = new BasicGameGrid(20,20, calculator);
-                this.canvasManager.changeGameGrid(this.mainGameGrid);
+                // On purpose, we only update rules and not whole grid, this enables some user experimentation
+                this.mainGame.updateCalculator(calculator);
             });
 
             this.rulesMenu.getItems().add(menuItem);
         }
 
-        nextGenerationItem.setOnAction(event -> {
-            this.mainGameGrid.nextGeneration();
-            this.canvasManager.redraw();
-        });
+        nextGenerationItem.setOnAction(event -> this.mainGame.nextGeneration());
 
     }
 
