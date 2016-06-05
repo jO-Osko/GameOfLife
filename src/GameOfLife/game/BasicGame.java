@@ -24,6 +24,11 @@ public class BasicGame {
         this.canvasManager.redraw();
     }
 
+    public void repaint(){
+        this.canvasManager.recalculateCellDimensions();
+
+    }
+
     public void updateCalculator(CellCalculator cellCalculator){
         this.gameGrid.updateCalculator(cellCalculator);
     }

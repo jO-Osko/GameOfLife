@@ -14,9 +14,9 @@
    <children>
       <MenuBar layoutY="2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <menus>
-          <Menu mnemonicParsing="false" text="File">
+          <Menu mnemonicParsing="false" text="Datoteka">
             <items>
-              <MenuItem mnemonicParsing="false" text="Close" />
+              <MenuItem mnemonicParsing="false" text="Nastavitve" onAction="#handleSettingsAction"/>
             </items>
           </Menu>
           <Menu fx:id="rulesMenu" mnemonicParsing="false" text="Pravila" />

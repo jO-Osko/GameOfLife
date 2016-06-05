@@ -6,6 +6,7 @@ import GameOfLife.Interfaces.CellCalculator;
 import GameOfLife.Interfaces.GameGrid;
 import GameOfLife.Interfaces.UpdatableCellGrid;
 import GameOfLife.cell.CellState;
+import GameOfLife.SampleSettings;
 
 import java.util.ArrayList;
 
@@ -17,6 +18,9 @@ public class BasicGameGrid implements GameGrid {
     private UpdatableCellGrid cellGrid;
     private CellCalculator cellCalculator;
 
+    public BasicGameGrid(SampleSettings settings){
+        this(settings.getNumberOfRows(), settings.getNumberOfColumns());
+    }
 
     public BasicGameGrid(int numberOfRows, int numberOfColumns) {
         this(numberOfRows, numberOfColumns, new ConwaysGame(null));

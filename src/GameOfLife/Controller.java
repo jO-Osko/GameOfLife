@@ -5,12 +5,12 @@ import GameOfLife.Interfaces.CellCalculator;
 import GameOfLife.canvas.CanvasManager;
 import GameOfLife.game.BasicGame;
 import GameOfLife.game.BasicGameGrid;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
 import java.net.URL;
@@ -21,7 +21,7 @@ public class Controller implements Initializable{
 
     private BasicGame mainGame;
 
-
+    private SampleSettings settings;
 
     @FXML
     private Canvas mainCanvas;
@@ -36,8 +36,13 @@ public class Controller implements Initializable{
     private MenuItem nextGenerationItem;
 
     @FXML
-    private void handleCanvasClick(MouseEvent event){
-
+    private void handleSettingsAction(ActionEvent event) throws Exception{
+        // throw vs return value passing vs inline pair....
+        SampleSettings tempSettings = this.settings.copy();
+        if (Main.self.showPersonEditDialog(tempSettings)){
+            this.settings = tempSettings;
+            this.updateGameGrid();
+        }
     }
 
     @Override
@@ -47,12 +52,9 @@ public class Controller implements Initializable{
         this.mainCanvas.heightProperty().bind(
                 this.canvasPane.heightProperty());
 
-        CanvasManager canvasManager = new CanvasManager(this.mainCanvas);
+        this.settings = new SampleSettings(20,30);
 
-        this.mainGame = new BasicGame(null, canvasManager);
-        this.mainGame.updateGameGrid(BasicGameGrid.demoGameGrid());
-
-        ArrayList<CellCalculator> calculators = new ArrayList<>(4);
+        ArrayList<CellCalculator> calculators = new ArrayList<>(5);
 
         calculators.add(new AllAlive());
         calculators.add(new AllDead());
@@ -73,6 +75,19 @@ public class Controller implements Initializable{
 
         nextGenerationItem.setOnAction(event -> this.mainGame.nextGeneration());
 
+        makeGameGrid();
+
+    }
+
+    private void makeGameGrid(){
+        CanvasManager canvasManager = new CanvasManager(this.mainCanvas);
+        this.mainGame = new BasicGame(null, canvasManager);
+        this.updateGameGrid();
+    }
+
+    private void updateGameGrid(){
+        this.mainGame.updateGameGrid(new BasicGameGrid(this.settings));
+        this.mainGame.repaint();
     }
 
 }
