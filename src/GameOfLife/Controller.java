@@ -10,13 +10,50 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.Pane;
 
 import java.net.URL;
+import java.nio.InvalidMarkException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable{
+
+    private static final ImageView playImageView;
+    private static final ImageView pauseImegeView;
+    private static final ImageView fasterImageView;
+    private static final ImageView nextGenerationImageView;
+
+    static{
+        Image image = new Image(Controller.class.getResource("data/img/play-icon.png").toExternalForm(), 20,20, true, true);
+
+        playImageView = new ImageView(image);
+        playImageView.setFitHeight(20);
+        playImageView.setFitWidth(20);
+
+        Image image0 = new Image(Controller.class.getResource("data/img/pause-icon.png").toExternalForm(), 20,20, true, true);
+
+        pauseImegeView = new ImageView(image0);
+        pauseImegeView.setFitHeight(20);
+        pauseImegeView.setFitWidth(20);
+
+        Image image1 = new Image(Controller.class.getResource("data/img/faster-icon.png").toExternalForm(), 20,20, true, true);
+
+        fasterImageView = new ImageView(image1);
+        fasterImageView.setFitHeight(20);
+        fasterImageView.setFitWidth(20);
+
+        Image image2 = new Image(Controller.class.getResource("data/img/next-icon.png").toExternalForm(), 20,20, true, true);
+
+        nextGenerationImageView = new ImageView(image2);
+        nextGenerationImageView.setFitHeight(20);
+        nextGenerationImageView.setFitWidth(20);
+
+    }
+
 
     private BasicGame mainGame;
 
@@ -35,6 +72,15 @@ public class Controller implements Initializable{
     private MenuItem nextGenerationItem;
 
     @FXML
+    private Button playButton;
+
+    @FXML
+    private Button nextGenerationButton;
+
+    @FXML
+    private Button fasterButton;
+
+    @FXML
     private void handleSettingsAction(ActionEvent event) throws Exception{
         // throw vs return value passing vs inline pair....
         SampleSettings tempSettings = this.settings.copy();
@@ -42,6 +88,17 @@ public class Controller implements Initializable{
             this.settings = tempSettings;
             this.updateGameGrid();
         }
+    }
+
+
+    @FXML
+    private void handleNextGeneration(ActionEvent event){
+        this.mainGame.nextGeneration();
+    }
+
+    @FXML
+    private void handlePlay(ActionEvent event){
+        // TODO
     }
 
     @Override
@@ -78,6 +135,10 @@ public class Controller implements Initializable{
         nextGenerationItem.setOnAction(event -> this.mainGame.nextGeneration());
 
         makeGameGrid();
+
+        playButton.setGraphic(playImageView);
+        fasterButton.setGraphic(fasterImageView);
+        nextGenerationButton.setGraphic(nextGenerationImageView);
 
     }
 

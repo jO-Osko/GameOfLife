@@ -1,22 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import java.lang.*?>
 <?import javafx.scene.canvas.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.canvas.Canvas?>
 
-
+<!--
 <?import GameOfLife.canvas.ResizableCanvas?>
+-->
 
+<?import javafx.scene.image.ImageView?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GameOfLife.Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="200" minWidth="200" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GameOfLife.Controller">
    <children>
       <MenuBar layoutY="2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <menus>
           <Menu mnemonicParsing="false" text="Datoteka">
             <items>
-              <MenuItem mnemonicParsing="false" text="Nastavitve" onAction="#handleSettingsAction"/>
+              <MenuItem mnemonicParsing="false" onAction="#handleSettingsAction" text="Nastavitve" />
             </items>
           </Menu>
           <Menu fx:id="rulesMenu" mnemonicParsing="false" text="Pravila" />
@@ -29,8 +32,18 @@
       </MenuBar>
       <Pane fx:id="canvasPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
          <children>
-            <ResizableCanvas fx:id="mainCanvas" height="575.0" style="fx-background-color: blue;" width="800.0" />
+            <Canvas fx:id="mainCanvas" height="575.0" style="fx-background-color: blue;" width="800.0" />
          </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
       </Pane>
+      <HBox alignment="BOTTOM_RIGHT" maxHeight="20.0" maxWidth="60.0" minHeight="20.0" minWidth="90.0" prefHeight="20.0" prefWidth="60.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+          <children>
+              <Button fx:id="playButton" style="-fx-padding: 0;"  maxWidth="20" minWidth="20" mnemonicParsing="false" onAction="#handlePlay" prefHeight="20.0" prefWidth="20.0" text="Play" />
+              <Button fx:id="fasterButton" style="-fx-padding: 0;" maxWidth="20" minWidth="20" mnemonicParsing="false" onAction="#handlePlay" prefWidth="20.0" text="faster" />
+              <Button fx:id="nextGenerationButton" style="-fx-padding: 0;" maxWidth="20" minWidth="20" mnemonicParsing="false" onAction="#handleNextGeneration" prefWidth="20.0" text="next generation" />
+          </children>
+      </HBox>
    </children>
 </AnchorPane>
