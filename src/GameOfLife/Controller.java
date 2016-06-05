@@ -9,8 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuItem;
+import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 
 import java.net.URL;
@@ -62,8 +61,11 @@ public class Controller implements Initializable{
         calculators.add(new Rule110(null));
         calculators.add(new Reverse(null));
 
+        ToggleGroup rulesToggleGroup = new ToggleGroup();
+
         for(CellCalculator calculator: calculators){
-            MenuItem menuItem = new MenuItem(calculator.getName());
+            RadioMenuItem menuItem = new RadioMenuItem(calculator.getName());
+            menuItem.setToggleGroup(rulesToggleGroup);
 
             menuItem.setOnAction(event -> {
                 // On purpose, we only update rules and not whole grid, this enables some user experimentation
