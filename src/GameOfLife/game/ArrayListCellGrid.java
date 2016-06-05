@@ -42,11 +42,10 @@ public class ArrayListCellGrid implements UpdatableCellGrid{
     }
 
     @Override
-    public void addLiveCell(int x, int y){
-        this.grid.get(x).set(y, CellState.ALIVE);
-
-
+    public void toggleCell(int x, int y) {
+        this.grid.get(x).set(y, this.grid.get(x).get(y)==CellState.ALIVE? CellState.DEAD: CellState.ALIVE);
     }
+
     @Override
     public void updateGrid(ArrayList<ArrayList<CellState>> grid){
         this.grid = grid;
