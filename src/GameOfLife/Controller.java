@@ -4,8 +4,7 @@ import GameOfLife.CellCalculators.*;
 import GameOfLife.Interfaces.CellCalculator;
 import GameOfLife.canvas.CanvasManager;
 import GameOfLife.game.BasicGame;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import GameOfLife.game.BasicGameGrid;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
@@ -21,7 +20,9 @@ import java.util.ResourceBundle;
 public class Controller implements Initializable{
 
     private CanvasManager canvasManager;
+    private BasicGameGrid mainGameGrid;
     private BasicGame mainGame;
+
 
 
     @FXML
@@ -48,31 +49,31 @@ public class Controller implements Initializable{
         this.mainCanvas.heightProperty().bind(
                 this.canvasPane.heightProperty());
 
-        this.mainGame = new BasicGame(20,20);
+        this.mainGameGrid = new BasicGameGrid(20,20);
 
-        this.canvasManager = new CanvasManager(this.mainCanvas, this.mainGame);
+        this.canvasManager = new CanvasManager(this.mainCanvas, this.mainGameGrid);
 
         ArrayList<CellCalculator> calculators = new ArrayList<>(4);
 
         calculators.add(new AllAlive());
         calculators.add(new AllDead());
-        calculators.add(new ConwaysGame(this.mainGame));
-        calculators.add(new Rule110(this.mainGame));
-        calculators.add(new Reverse(mainGame));
+        calculators.add(new ConwaysGame(null));
+        calculators.add(new Rule110(null));
+        calculators.add(new Reverse(null));
 
         for(CellCalculator calculator: calculators){
             MenuItem menuItem = new MenuItem(calculator.getName());
 
             menuItem.setOnAction(event -> {
-                this.mainGame = new BasicGame(20,20, calculator);
-                this.canvasManager.changeGameGrid(this.mainGame);
+                this.mainGameGrid = new BasicGameGrid(20,20, calculator);
+                this.canvasManager.changeGameGrid(this.mainGameGrid);
             });
 
             this.rulesMenu.getItems().add(menuItem);
         }
 
         nextGenerationItem.setOnAction(event -> {
-            this.mainGame.nextGeneration();
+            this.mainGameGrid.nextGeneration();
             this.canvasManager.redraw();
         });
 
