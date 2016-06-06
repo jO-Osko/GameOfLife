@@ -36,7 +36,7 @@
       <HBox alignment="BOTTOM_RIGHT" maxHeight="20.0" maxWidth="60.0" minHeight="20.0" minWidth="90.0" prefHeight="20.0" prefWidth="60.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
           <children>
               <Button fx:id="playButton" style="-fx-padding: 0;"  maxWidth="20" minWidth="20" mnemonicParsing="false" onAction="#handlePlay" prefHeight="20.0" prefWidth="20.0" text="Play" />
-              <Button fx:id="fasterButton" style="-fx-padding: 0;" maxWidth="20" minWidth="20" mnemonicParsing="false" onAction="#handlePlay" prefWidth="20.0" text="faster" />
+              <Button fx:id="fasterButton" style="-fx-padding: 0;" maxWidth="20" minWidth="20" mnemonicParsing="false" onAction="#handleChangeSpeed" prefWidth="20.0" text="faster" />
               <Button fx:id="nextGenerationButton" style="-fx-padding: 0;" maxWidth="20" minWidth="20" mnemonicParsing="false" onAction="#handleNextGeneration" prefWidth="20.0" text="next generation" />
           </children>
       </HBox>

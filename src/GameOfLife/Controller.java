@@ -6,6 +6,7 @@ import GameOfLife.canvas.CanvasManager;
 import GameOfLife.game.BasicGame;
 import GameOfLife.game.BasicGameGrid;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
@@ -93,7 +94,12 @@ public class Controller implements Initializable{
 
     @FXML
     private void handlePlay(ActionEvent event){
-        // TODO
+        this.mainGame.play();
+    }
+
+    @FXML
+    private void handleChangeSpeed(ActionEvent event){
+        this.mainGame.changeAnimationSpeed();
     }
 
     @Override
@@ -132,6 +138,7 @@ public class Controller implements Initializable{
         playButton.setGraphic(playImageView);
         fasterButton.setGraphic(fasterImageView);
         nextGenerationButton.setGraphic(nextGenerationImageView);
+
 
     }
 
