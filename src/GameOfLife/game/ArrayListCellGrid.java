@@ -13,16 +13,22 @@ public class ArrayListCellGrid implements UpdatableCellGrid{
     private int numberOfRows = 0;
     private int numberOfColumns = 0;
 
+    private boolean warpVertical;
+    private boolean wrapHorizontal;
 
     public ArrayListCellGrid(){
         this(0,0);
     }
 
     public ArrayListCellGrid(int numberOfRows, int numberOfColumns) {
-        this(numberOfRows, numberOfColumns, CellState.DEAD);
+        this(numberOfRows, numberOfColumns, false, false, CellState.DEAD);
     }
 
-    public ArrayListCellGrid(int numberOfRows, int numberOfColumns, CellState initialState){
+    public ArrayListCellGrid(int numberOfRows, int numberOfColumns, boolean wrapVertical, boolean wrapHorizontal) {
+        this(numberOfRows, numberOfColumns, wrapVertical, wrapHorizontal, CellState.DEAD);
+    }
+
+    public ArrayListCellGrid(int numberOfRows, int numberOfColumns, boolean wrapVertical, boolean wrapHorizontal, CellState initialState){
         this.numberOfRows = numberOfRows;
         this.numberOfColumns = numberOfColumns;
 
@@ -35,9 +41,8 @@ public class ArrayListCellGrid implements UpdatableCellGrid{
             this.grid.add(row);
         }
 
-        //this.grid.get(5).set(5, CellState.ALIVE);
-        //this.grid.get(5).set(6, CellState.ALIVE);
-        //this.grid.get(5).set(7, CellState.ALIVE);
+        this.warpVertical = wrapVertical;
+        this.wrapHorizontal = wrapHorizontal;
 
     }
 
@@ -53,6 +58,12 @@ public class ArrayListCellGrid implements UpdatableCellGrid{
 
     @Override
     public CellState getCellStateAt(int x_coor, int y_coor) {
+        if(this.warpVertical){
+            x_coor = (x_coor + this.numberOfRows) % this.numberOfRows;
+        }
+        if(wrapHorizontal){
+            y_coor = (y_coor + this.numberOfColumns) % this.numberOfColumns;
+        }
         if(x_coor < 0 || x_coor >= numberOfRows || y_coor < 0 || y_coor >= numberOfColumns){
             // Automatically dead if outside of grid
             return CellState.DEAD;

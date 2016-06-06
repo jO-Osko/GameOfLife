@@ -19,17 +19,21 @@ public class BasicGameGrid implements GameGrid {
     private CellCalculator cellCalculator;
 
     public BasicGameGrid(SampleSettings settings){
-        this(settings.getNumberOfRows(), settings.getNumberOfColumns());
+        this(settings.getNumberOfRows(), settings.getNumberOfColumns(), settings.isWrapVertical(), settings.isWrapHorizontal());
     }
 
     public BasicGameGrid(int numberOfRows, int numberOfColumns) {
-        this(numberOfRows, numberOfColumns, new ConwaysGame(null));
+        this(numberOfRows, numberOfColumns, false, false, new ConwaysGame(null));
     }
 
-    public BasicGameGrid(int numberOfRows, int numberOfColumns, CellCalculator cellCalculator){
+    public BasicGameGrid(int numberOfRows, int numberOfColumns, boolean wrapVertical, boolean wrapHorizontal) {
+        this(numberOfRows, numberOfColumns, wrapVertical, wrapHorizontal, new ConwaysGame(null));
+    }
+
+    public BasicGameGrid(int numberOfRows, int numberOfColumns, boolean wrapVertical, boolean wrapHorizontal, CellCalculator cellCalculator){
         this.numberOfRows = numberOfRows;
         this.numberOfColumns = numberOfColumns;
-        this.cellGrid = new ArrayListCellGrid(numberOfRows, numberOfColumns);
+        this.cellGrid = new ArrayListCellGrid(numberOfRows, numberOfColumns, wrapVertical, wrapHorizontal);
         this.cellCalculator = cellCalculator;
         this.cellCalculator.UpdateGrid(this);
     }
@@ -72,10 +76,6 @@ public class BasicGameGrid implements GameGrid {
     @Override
     public void setCell(int x, int y){
         this.cellGrid.toggleCell(x, y);
-    }
-
-    public static BasicGameGrid demoGameGrid(){
-        return new BasicGameGrid(20,30);
     }
 
 }
