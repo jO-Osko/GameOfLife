@@ -5,6 +5,7 @@ import GameOfLife.Settings;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
@@ -23,6 +24,12 @@ public class SettingsDialogController implements Initializable{
     @FXML
     private TextField numberOfColumnsTextField;
 
+    @FXML
+    private CheckBox wrapHorizontalCheckbox;
+
+    @FXML
+    private CheckBox wrapVerticalCheckbox;
+
 
     private Stage dialogStage;
 
@@ -38,6 +45,8 @@ public class SettingsDialogController implements Initializable{
         this.settings = settings;
         this.numberOfColumnsTextField.textProperty().setValue(settings.getNumberOfColumns() + "");
         this.numberOfRowsTextField.textProperty().setValue(settings.getNumberOfRows() + "");
+        this.wrapHorizontalCheckbox.selectedProperty().set(settings.isWrapHorizontal());
+        this.wrapVerticalCheckbox.selectedProperty().set(settings.isWrapVertical());
     }
 
 
@@ -50,6 +59,8 @@ public class SettingsDialogController implements Initializable{
         okClicked = true;
         this.settings.setNumberOfColumns(Integer.parseInt(numberOfColumnsTextField.textProperty().get()));
         this.settings.setNumberOfRows(Integer.parseInt(numberOfRowsTextField.textProperty().get()));
+        this.settings.setWrapHorizontal(wrapHorizontalCheckbox.isSelected());
+        this.settings.setWrapVertical(wrapVerticalCheckbox.isSelected());
         dialogStage.close();
     }
 

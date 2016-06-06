@@ -12,11 +12,9 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
 import javafx.scene.layout.Pane;
 
 import java.net.URL;
-import java.nio.InvalidMarkException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -108,7 +106,7 @@ public class Controller implements Initializable{
         this.mainCanvas.heightProperty().bind(
                 this.canvasPane.heightProperty());
 
-        this.settings = new SampleSettings(20,30);
+        this.settings = new SampleSettings(20,30, true, false);
 
         ArrayList<CellCalculator> calculators = new ArrayList<>(5);
 
