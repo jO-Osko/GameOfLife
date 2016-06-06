@@ -67,9 +67,6 @@ public class Controller implements Initializable{
     private Menu rulesMenu;
 
     @FXML
-    private MenuItem nextGenerationItem;
-
-    @FXML
     private Button playButton;
 
     @FXML
@@ -129,8 +126,6 @@ public class Controller implements Initializable{
 
             this.rulesMenu.getItems().add(menuItem);
         }
-
-        nextGenerationItem.setOnAction(event -> this.mainGame.nextGeneration());
 
         makeGameGrid();
 

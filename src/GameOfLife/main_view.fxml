@@ -23,11 +23,6 @@
             </items>
           </Menu>
           <Menu fx:id="rulesMenu" mnemonicParsing="false" text="Pravila" />
-          <Menu mnemonicParsing="false" text="Igra">
-            <items>
-              <MenuItem fx:id="nextGenerationItem" mnemonicParsing="false" text="Naslednja generacija" />
-            </items>
-          </Menu>
         </menus>
       </MenuBar>
       <Pane fx:id="canvasPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
