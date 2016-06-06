@@ -82,6 +82,8 @@ public class Controller implements Initializable{
         SampleSettings tempSettings = this.settings.copy();
         if (Main.self.showPersonEditDialog(tempSettings)){
             this.settings = tempSettings;
+            this.mainGame.stop();
+            this.playButton.setGraphic(pauseImegeView);
             this.updateGameGrid();
         }
     }
@@ -94,7 +96,11 @@ public class Controller implements Initializable{
 
     @FXML
     private void handlePlay(ActionEvent event){
-        this.mainGame.play();
+        if(this.mainGame.play()){
+            this.playButton.setGraphic(pauseImegeView);
+        }else{
+            this.playButton.setGraphic(playImageView);
+        }
     }
 
     @FXML
