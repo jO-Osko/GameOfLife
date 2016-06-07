@@ -1,7 +1,6 @@
 package GameOfLife.game;
 
 
-import GameOfLife.Interfaces.CellGrid;
 import GameOfLife.Interfaces.UpdatableCellGrid;
 import GameOfLife.cell.CellState;
 

@@ -18,9 +18,6 @@ public class Main extends Application {
     private int windowHeight = 600;
     private int windowWidth = 800;
 
-    private int minWindowWidth = windowWidth/2;
-    private int minWindowHeight = windowHeight/2;
-
     private Stage primaryStage;
 
     private String title = "Conway's game of life";
@@ -36,10 +33,6 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("main_view.fxml"));
         primaryStage.setTitle(this.title);
         //primaryStage.setResizable(false); // javafx bug on windows 8
-
-        this.windowHeight = Settings.windowHeight;
-        this.windowWidth = Settings.windowWidth;
-
 
         Scene scene = new Scene(root, this.windowWidth, this.windowHeight);
         primaryStage.setScene(scene);

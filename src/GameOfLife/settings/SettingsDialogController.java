@@ -1,17 +1,12 @@
 package GameOfLife.settings;
 
 import GameOfLife.SampleSettings;
-import GameOfLife.Settings;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-import javax.naming.event.ObjectChangeListener;
 import java.net.URL;
 import java.util.ResourceBundle;
 

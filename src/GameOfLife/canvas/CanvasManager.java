@@ -3,14 +3,11 @@ package GameOfLife.canvas;
 
 import GameOfLife.Interfaces.GameGrid;
 import GameOfLife.cell.CellState;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
-import sun.rmi.runtime.Log;
 
 public class CanvasManager {
 
