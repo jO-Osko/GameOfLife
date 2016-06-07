@@ -19,7 +19,7 @@ public class BasicGameGrid implements GameGrid {
     private CellCalculator cellCalculator;
 
     public BasicGameGrid(SampleSettings settings){
-        this(settings.getNumberOfRows(), settings.getNumberOfColumns(), settings.isWrapVertical(), settings.isWrapHorizontal());
+        this(settings.getNumberOfRows(), settings.getNumberOfColumns(), settings.isWrapVertical(), settings.isWrapHorizontal(), settings.getCellCalculator());
     }
 
     public BasicGameGrid(int numberOfRows, int numberOfColumns) {

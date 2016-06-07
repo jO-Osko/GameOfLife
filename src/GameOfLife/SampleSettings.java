@@ -1,6 +1,9 @@
 package GameOfLife;
 
 
+import GameOfLife.CellCalculators.ConwaysGame;
+import GameOfLife.Interfaces.CellCalculator;
+
 public class SampleSettings implements Cloneable{
     private int numberOfRows;
     private int numberOfColumns;
@@ -8,17 +11,19 @@ public class SampleSettings implements Cloneable{
     private boolean wrapVertical;
     private boolean wrapHorizontal;
 
+    private CellCalculator cellCalculator;
 
-    public SampleSettings(int numberOfRows, int numberOfColumns, boolean wrapVertical, boolean wrapHorizontal) {
+    public SampleSettings(int numberOfRows, int numberOfColumns, boolean wrapVertical, boolean wrapHorizontal, CellCalculator cellCalculator) {
         this.numberOfRows = numberOfRows;
         this.numberOfColumns = numberOfColumns;
         this.wrapVertical = wrapVertical;
         this.wrapHorizontal = wrapHorizontal;
+        this.cellCalculator = cellCalculator;
     }
 
 
     public SampleSettings(int numberOfRows, int numberOfColumns){
-        this(numberOfRows, numberOfColumns, false, false);
+        this(numberOfRows, numberOfColumns, false, false, new ConwaysGame(null));
     }
 
 
@@ -54,8 +59,16 @@ public class SampleSettings implements Cloneable{
         this.wrapHorizontal = wrapHorizontal;
     }
 
+    public CellCalculator getCellCalculator() {
+        return cellCalculator;
+    }
+
+    public void setCellCalculator(CellCalculator cellCalculator) {
+        this.cellCalculator = cellCalculator;
+    }
+
     public SampleSettings copy(){
-        return new SampleSettings(numberOfRows, numberOfColumns, wrapVertical, wrapHorizontal);
+        return new SampleSettings(numberOfRows, numberOfColumns, wrapVertical, wrapHorizontal, cellCalculator);
     }
 
 }

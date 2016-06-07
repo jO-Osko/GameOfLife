@@ -6,7 +6,6 @@ import GameOfLife.canvas.CanvasManager;
 import GameOfLife.game.BasicGame;
 import GameOfLife.game.BasicGameGrid;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
@@ -22,7 +21,7 @@ import java.util.ResourceBundle;
 public class Controller implements Initializable{
 
     private static final ImageView playImageView;
-    private static final ImageView pauseImegeView;
+    private static final ImageView pauseImageView;
     private static final ImageView fasterImageView;
     private static final ImageView nextGenerationImageView;
 
@@ -35,9 +34,9 @@ public class Controller implements Initializable{
 
         Image image0 = new Image(Controller.class.getResource("data/img/pause-icon.png").toExternalForm(), 20,20, true, true);
 
-        pauseImegeView = new ImageView(image0);
-        pauseImegeView.setFitHeight(20);
-        pauseImegeView.setFitWidth(20);
+        pauseImageView = new ImageView(image0);
+        pauseImageView.setFitHeight(20);
+        pauseImageView.setFitWidth(20);
 
         Image image1 = new Image(Controller.class.getResource("data/img/faster-icon.png").toExternalForm(), 20,20, true, true);
 
@@ -83,7 +82,7 @@ public class Controller implements Initializable{
         if (Main.self.showPersonEditDialog(tempSettings)){
             this.settings = tempSettings;
             this.mainGame.stop();
-            this.playButton.setGraphic(pauseImegeView);
+            this.playButton.setGraphic(playImageView);
             this.updateGameGrid();
         }
     }
@@ -97,7 +96,7 @@ public class Controller implements Initializable{
     @FXML
     private void handlePlay(ActionEvent event){
         if(this.mainGame.play()){
-            this.playButton.setGraphic(pauseImegeView);
+            this.playButton.setGraphic(pauseImageView);
         }else{
             this.playButton.setGraphic(playImageView);
         }
@@ -115,7 +114,7 @@ public class Controller implements Initializable{
         this.mainCanvas.heightProperty().bind(
                 this.canvasPane.heightProperty());
 
-        this.settings = new SampleSettings(20,30, true, false);
+        this.settings = new SampleSettings(20,30, true, false, new ConwaysGame(null));
 
         ArrayList<CellCalculator> calculators = new ArrayList<>(5);
 
@@ -131,8 +130,13 @@ public class Controller implements Initializable{
             RadioMenuItem menuItem = new RadioMenuItem(calculator.getName());
             menuItem.setToggleGroup(rulesToggleGroup);
 
+            if(this.settings.getCellCalculator().getName().equals(calculator.getName())){
+                menuItem.setSelected(true);
+            }
+
             menuItem.setOnAction(event -> {
                 // On purpose, we only update rules and not whole grid, this enables some user experimentation
+                this.settings.setCellCalculator(calculator);
                 this.mainGame.updateCalculator(calculator);
             });
 
